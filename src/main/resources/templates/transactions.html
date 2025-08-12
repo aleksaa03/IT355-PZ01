@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Istorija transakcija</title>
+</head>
+<body>
+<h1>Istorija transakcija</h1>
+
+<table border="1">
+    <tr>
+        <th>Datum</th>
+        <th>Iz</th>
+        <th>U</th>
+        <th>Iznos</th>
+        <th>Preračunat iznos</th>
+    </tr>
+    <tr th:each="tx : ${transactions}">
+        <td th:text="${tx.getDateTime()}"></td>
+        <td th:text="${tx.getFromCurrency().getCode()}"></td>
+        <td th:text="${tx.getToCurrency().getCode()}"></td>
+        <td th:text="${tx.getAmountFrom()}"></td>
+        <td th:text="${tx.getAmountTo()}"></td>
+    </tr>
+</table>
+
+<a href="/">Nazad</a>
+</body>
+</html>

@@ -12,7 +12,7 @@ public class Transaction {
 
     public Transaction() {}
 
-    public Transaction(Currency fromCurrency, Currency toCurrency, BigDecimal amountFrom, BigDecimal amountTo) {
+    public Transaction (Currency fromCurrency, Currency toCurrency, BigDecimal amountFrom, BigDecimal amountTo) {
         this.fromCurrency = fromCurrency;
         this.toCurrency = toCurrency;
         this.amountFrom = amountFrom;
