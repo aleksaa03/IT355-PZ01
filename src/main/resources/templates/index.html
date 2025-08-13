@@ -2,44 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Simple Exchange</title>
+    <title>SimpleExchange - Kursna Lista</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<nav>
-    <a href="/">Početna</a> |
-    <a href="/currencies">Valute</a> |
-    <a href="/exchange-rates">Kursni list</a> |
-    <a href="/transactions">Transakcije</a>
-</nav>
+<h1>SimpleExchange Menjačnica</h1>
 
-<h1>Kursna lista (bazna valuta: <span th:text="${baseCurrency.code}"></span>)</h1>
-
+<h2>Kursna lista (bazna valuta: <span th:text="${baseCurrency.code}"></span>)</h2>
 <table border="1">
     <tr>
         <th>Valuta</th>
         <th>Naziv</th>
-        <th>Zemlja</th>
-        <th>Kurs prema bazi</th>
+        <th>Država</th>
+        <th>Kurs prema baznoj</th>
     </tr>
     <tr th:each="rate : ${exchangeRates}">
-        <td th:text="${rate.currency.code}"></td>
-        <td th:text="${rate.currency.name}"></td>
-        <td th:text="${rate.currency.country}"></td>
+        <td th:text="${rate.code}"></td>
+        <td th:text="${rate.name}"></td>
+        <td th:text="${rate.country}"></td>
         <td th:text="${rate.rateToBase}"></td>
     </tr>
 </table>
 
 <h2>Konverzija valuta</h2>
-<form action="/convert" method="post">
-    <label>Iz: </label>
-    <input type="text" name="from" required>
-    <label>U: </label>
-    <input type="text" name="to" required>
-    <label>Iznos: </label>
-    <input type="number" step="0.01" name="amount" required>
-    <button type="submit">Pretvori</button>
+<form th:action="@{/convert}" method="post">
+    <label>Od valute:</label>
+    <select name="from">
+        <option th:each="rate : ${exchangeRates}" th:value="${rate.getCode()}" th:text="${rate.getCode()}"></option>
+        <option th:value="${baseCurrency.getCode()}" th:text="${baseCurrency.getCode()}"></option>
+    </select>
+
+    <label>U valutu:</label>
+    <select name="to">
+        <option th:each="rate : ${exchangeRates}" th:value="${rate.getCode()}" th:text="${rate.getCode()}"></option>
+        <option th:value="${baseCurrency.getCode()}" th:text="${baseCurrency.getCode()}"></option>
+    </select>
+
+    <label>Iznos:</label>
+    <input type="number" name="amount" step="0.01" required/>
+
+    <button type="submit">Konvertuj</button>
 </form>
 
-<p><a href="/transactions">Pregled transakcija</a></p>
+<p><a th:href="@{/transactions}">Pregled transakcija</a></p>
 </body>
 </html>

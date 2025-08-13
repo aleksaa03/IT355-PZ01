@@ -2,28 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Istorija transakcija</title>
+    <title>Transakcije</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Istorija transakcija</h1>
+<h1>Pregled transakcija</h1>
 
 <table border="1">
     <tr>
-        <th>Datum</th>
-        <th>Iz</th>
-        <th>U</th>
+        <th>Od valute</th>
+        <th>U valutu</th>
         <th>Iznos</th>
-        <th>Preračunat iznos</th>
+        <th>Rezultat</th>
+        <th>Vreme</th>
     </tr>
     <tr th:each="tx : ${transactions}">
-        <td th:text="${tx.getDateTime()}"></td>
         <td th:text="${tx.getFromCurrency().getCode()}"></td>
         <td th:text="${tx.getToCurrency().getCode()}"></td>
         <td th:text="${tx.getAmountFrom()}"></td>
         <td th:text="${tx.getAmountTo()}"></td>
+        <td th:text="${tx.getDateTime()}"></td>
     </tr>
 </table>
 
-<a href="/">Nazad</a>
+<p><a th:href="@{/}">Nazad</a></p>
 </body>
 </html>

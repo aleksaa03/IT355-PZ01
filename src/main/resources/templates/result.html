@@ -3,20 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Rezultat konverzije</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <h1>Rezultat konverzije</h1>
 
-<p>
-    <span th:text="${transaction.getAmountFrom()}"></span>
-    <span th:text="${transaction.getFromCurrency().getCode()}"></span>
-    =
-    <span th:text="${transaction.getAmountTo()}"></span>
-    <span th:text="${transaction.getToCurrency().getCode()}"></span>
-</p>
+<p th:text="'Od: ' + ${transaction.amountFrom} + ' ' + ${transaction.fromCurrency.code}"></p>
+<p th:text="'U: ' + ${transaction.amountTo} + ' ' + ${transaction.toCurrency.code}"></p>
+<p th:text="'Vreme: ' + ${transaction.dateTime}"></p>
 
-<p>Datum: <span th:text="${transaction.getDateTime()}"></span></p>
-
-<a href="/">Nazad na kursnu listu</a>
+<p><a th:href="@{/}">Nazad</a></p>
+<p><a th:href="@{/transactions}">Pregled transakcija</a></p>
 </body>
 </html>

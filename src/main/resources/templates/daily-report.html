@@ -1,0 +1,22 @@
+<h1>Daily Report - <span th:text="${date}"></span></h1>
+
+<h2>Summary:</h2>
+<ul>
+    <li th:each="entry : ${summary}">
+        <span th:text="${entry.key}"></span>: <span th:text="${entry.value}"></span>
+    </li>
+</ul>
+
+<h2>Transactions:</h2>
+<table>
+    <tr>
+        <th>From</th><th>To</th><th>Amount From</th><th>Amount To</th><th>Time</th>
+    </tr>
+    <tr th:each="tx : ${transactions}">
+        <td th:text="${tx.fromCurrency.code}"></td>
+        <td th:text="${tx.toCurrency.code}"></td>
+        <td th:text="${tx.amountFrom}"></td>
+        <td th:text="${tx.amountTo}"></td>
+        <td th:text="${tx.dateTime}"></td>
+    </tr>
+</table>

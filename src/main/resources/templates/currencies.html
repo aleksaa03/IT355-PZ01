@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Valute</title>
+</head>
+<body>
+<h1>Valute</h1>
+
+<h2>Dodaj novu valutu</h2>
+<form th:action="@{/currencies/add}" th:object="${currency}" method="post">
+    <label>Kod: <input type="text" th:field="*{code}" required/></label><br/>
+    <label>Naziv: <input type="text" th:field="*{name}" required/></label><br/>
+    <label>Država: <input type="text" th:field="*{country}" required/></label><br/>
+    <label>Kurs: <input type="text" th:field="*{rateToBase}" required /></label><br/>
+    <button type="submit">Dodaj</button>
+</form>
+
+<h2>Lista valuta</h2>
+<table border="1">
+    <tr>
+        <th>Kod</th>
+        <th>Naziv</th>
+        <th>Država</th>
+        <th>Kurs</th>
+    </tr>
+    <tr th:each="currency : ${currencies}">
+        <td th:text="${currency.code}"></td>
+        <td th:text="${currency.name}"></td>
+        <td th:text="${currency.country}"></td>
+        <td th:text="${currency.rateToBase}"></td>
+    </tr>
+</table>
+
+<p><a th:href="@{/}">Nazad</a></p>
+</body>
+</html>

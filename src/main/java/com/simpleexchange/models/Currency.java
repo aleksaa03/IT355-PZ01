@@ -1,9 +1,12 @@
 package com.simpleexchange.models;
 
+import java.math.BigDecimal;
+
 public class Currency {
     private String code;
     private String name;
     private String country;
+    private BigDecimal rateToBase;
 
     public Currency() {}
 
@@ -11,6 +14,13 @@ public class Currency {
         this.code = code;
         this.name = name;
         this.country = country;
+    }
+
+    public Currency(String code, String name, String country, BigDecimal rateToBase) {
+        this.code = code;
+        this.name = name;
+        this.country = country;
+        this.rateToBase = rateToBase;
     }
 
     public String getCode() {
@@ -35,5 +45,13 @@ public class Currency {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public BigDecimal getRateToBase() {
+        return rateToBase;
+    }
+
+    public void setRateToBase(BigDecimal rateToBase) {
+        this.rateToBase = rateToBase;
     }
 }
