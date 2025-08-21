@@ -39,4 +39,21 @@ public class CurrencyService {
     public BigDecimal getExchangeRate(String code) {
         return currencies.get(code).getRateToBase();
     }
+
+    public void updateCurrency(String code, Currency updatedCurrency) {
+        if (!currencies.containsKey(code))
+            throw new RuntimeException("Valuta sa code '" + code + "' ne postoji!");
+
+        Currency existing = currencies.get(code);
+        existing.setName(updatedCurrency.getName());
+        existing.setCountry(updatedCurrency.getCountry());
+        existing.setRateToBase(updatedCurrency.getRateToBase());
+    }
+
+    public void deleteCurrency(String code) {
+        if (!currencies.containsKey(code))
+            throw new RuntimeException("Valuta sa code '" + code + "' ne postoji!");
+
+        currencies.remove(code);
+    }
 }

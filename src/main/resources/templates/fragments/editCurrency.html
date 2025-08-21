@@ -1,0 +1,26 @@
+<div th:fragment="editCurrencyModal">
+    <div id="editModal" class="edit-modal fixed inset-0 hidden flex items-center justify-center">
+        <div class="bg-white p-6 rounded shadow-lg w-96">
+            <h2 class="text-xl font-bold mb-4">Izmeni valutu</h2>
+            <form id="editForm" th:action="@{/currencies/edit}" method="post">
+                <input type="hidden" name="code" id="editCode">
+
+                <label class="block mb-2">Naziv:
+                    <input type="text" name="name" id="editName" class="border p-2 rounded w-full" required>
+                </label>
+                <label class="block mb-2">Država:
+                    <input type="text" name="country" id="editCountry" class="border p-2 rounded w-full" required>
+                </label>
+                <label class="block mb-2">Kurs prema bazi:
+                    <input type="number" step="0.01" name="rateToBase" id="editRate" class="border p-2 rounded w-full" required>
+                </label>
+
+                <div class="flex justify-end space-x-2 mt-4">
+                    <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded"
+                            onclick="closeEditModal()">Otkaži</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Sačuvaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

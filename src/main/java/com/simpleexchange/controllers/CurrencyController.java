@@ -4,10 +4,7 @@ import com.simpleexchange.models.Currency;
 import com.simpleexchange.services.CurrencyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/currencies")
@@ -28,6 +25,18 @@ public class CurrencyController {
     @PostMapping("/add")
     public String addCurrency(@ModelAttribute Currency currency) {
         currencyService.addCurrency(currency);
+        return "redirect:/currencies";
+    }
+
+    @PostMapping("/edit")
+    public String editCurrency(@ModelAttribute Currency currency) {
+        currencyService.updateCurrency(currency.getCode(), currency);
+        return "redirect:/currencies";
+    }
+
+    @PostMapping("/delete/{code}")
+    public String deleteCurrency(@PathVariable String code) {
+        currencyService.deleteCurrency(code);
         return "redirect:/currencies";
     }
 }

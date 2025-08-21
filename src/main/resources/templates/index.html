@@ -1,49 +1,65 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>SimpleExchange - Kursna Lista</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Početna</title>
 </head>
 <body>
-<h1>SimpleExchange Menjačnica</h1>
+<section layout:fragment="content">
 
-<h2>Kursna lista (bazna valuta: <span th:text="${baseCurrency.code}"></span>)</h2>
-<table border="1">
-    <tr>
-        <th>Valuta</th>
-        <th>Naziv</th>
-        <th>Država</th>
-        <th>Kurs prema baznoj</th>
-    </tr>
-    <tr th:each="rate : ${exchangeRates}">
-        <td th:text="${rate.code}"></td>
-        <td th:text="${rate.name}"></td>
-        <td th:text="${rate.country}"></td>
-        <td th:text="${rate.rateToBase}"></td>
-    </tr>
-</table>
+    <h1 class="text-2xl font-bold mb-4">SimpleExchange Menjačnica</h1>
 
-<h2>Konverzija valuta</h2>
-<form th:action="@{/convert}" method="post">
-    <label>Od valute:</label>
-    <select name="from">
-        <option th:each="rate : ${exchangeRates}" th:value="${rate.getCode()}" th:text="${rate.getCode()}"></option>
-        <option th:value="${baseCurrency.getCode()}" th:text="${baseCurrency.getCode()}"></option>
-    </select>
+    <div class="bg-white p-4 rounded shadow mb-6">
+        <h2 class="text-xl mb-2">Kursna lista (bazna valuta: <span th:text="${baseCurrency.code}"></span>)</h2>
+        <table class="w-full border-collapse border border-gray-400">
+            <thead class="bg-gray-200">
+            <tr>
+                <th class="border p-2">Valuta</th>
+                <th class="border p-2">Naziv</th>
+                <th class="border p-2">Država</th>
+                <th class="border p-2">Kurs prema baznoj</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="rate : ${exchangeRates}" class="hover:bg-gray-100">
+                <td class="border p-2" th:text="${rate.code}"></td>
+                <td class="border p-2" th:text="${rate.name}"></td>
+                <td class="border p-2" th:text="${rate.country}"></td>
+                <td class="border p-2" th:text="${rate.rateToBase}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <label>U valutu:</label>
-    <select name="to">
-        <option th:each="rate : ${exchangeRates}" th:value="${rate.getCode()}" th:text="${rate.getCode()}"></option>
-        <option th:value="${baseCurrency.getCode()}" th:text="${baseCurrency.getCode()}"></option>
-    </select>
+    <div class="bg-white p-4 rounded shadow">
+        <h2 class="text-xl mb-2">Konverzija valuta</h2>
+        <form th:action="@{/convert}" method="post" class="space-y-2">
+            <div>
+                <label>Od valute:</label>
+                <select name="from" class="border p-2 rounded w-full">
+                    <option th:each="rate : ${exchangeRates}" th:value="${rate.getCode()}" th:text="${rate.getCode()}"></option>
+                    <option th:value="${baseCurrency.getCode()}" th:text="${baseCurrency.getCode()}"></option>
+                </select>
+            </div>
 
-    <label>Iznos:</label>
-    <input type="number" name="amount" step="0.01" required/>
+            <div>
+                <label>U valutu:</label>
+                <select name="to" class="border p-2 rounded w-full">
+                    <option th:each="rate : ${exchangeRates}" th:value="${rate.getCode()}" th:text="${rate.getCode()}"></option>
+                    <option th:value="${baseCurrency.getCode()}" th:text="${baseCurrency.getCode()}"></option>
+                </select>
+            </div>
 
-    <button type="submit">Konvertuj</button>
-</form>
+            <div>
+                <label>Iznos:</label>
+                <input type="number" name="amount" step="0.01" required class="border p-2 rounded w-full"/>
+            </div>
 
-<p><a th:href="@{/transactions}">Pregled transakcija</a></p>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Konvertuj</button>
+        </form>
+    </div>
+
+</section>
 </body>
 </html>

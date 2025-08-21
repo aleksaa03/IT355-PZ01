@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>SimpleExchange</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+<header class="bg-blue-600 text-white p-4 mb-6 flex justify-between items-center">
+    <a class="text-xl font-bold" href="/">SimpleExchange</a>
+    <nav class="mr-5">
+        <a href="/" class="mr-4 hover:underline">Početna</a>
+        <a href="/currencies" class="mr-4 hover:underline">Valute</a>
+        <a href="/transactions" class="mr-4 hover:underline">Transakcije</a>
+        <a href="/reports/daily-report" class="mr-4 hover:underline">Dnevni izveštaj</a>
+        <a href="/offices" class="hover:underline">Poslovnice</a>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 flex-1">
+    <section layout:fragment="content"></section>
+</main>
+
+<footer class="mt-6 p-4 bg-gray-200 text-center">
+    &copy; 2025 SimpleExchange
+</footer>
+</body>
+</html>
